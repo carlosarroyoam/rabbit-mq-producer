@@ -1,5 +1,6 @@
 package com.carlosarroyoam.service.rabbitmq.messages;
 
+import com.carlosarroyoam.service.rabbitmq.messages.event.MessageCreatedEvent;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,8 @@ public class MessageController {
   }
 
   @PostMapping(consumes = "application/json")
-  public ResponseEntity<Void> create(@RequestBody Message message, UriComponentsBuilder builder) {
+  public ResponseEntity<Void> create(@RequestBody MessageCreatedEvent message,
+      UriComponentsBuilder builder) {
     messageService.send(message);
     UriComponents uriComponents = builder.path("/messages/{messageId}")
         .buildAndExpand(message.getId());

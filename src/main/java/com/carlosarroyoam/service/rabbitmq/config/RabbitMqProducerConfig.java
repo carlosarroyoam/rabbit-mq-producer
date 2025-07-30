@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMqConfig {
-  public static final String QUEUE_NAME = "message.queue";
-  public static final String EXCHANGE_NAME = "message.exchange";
-  public static final String ROUTING_KEY = "message.key";
+public class RabbitMqProducerConfig {
+  public static final String MESSAGES_EXCHANGE_NAME = "messages.exchange";
+  public static final String MESSAGES_CREATED_QUEUE_NAME = "messages-created-queue";
+  public static final String MESSAGES_CREATED_ROUTING_KEY = "messages.created.key";
 
   @Bean
   Queue queue() {
-    return new Queue(QUEUE_NAME, true);
+    return new Queue(MESSAGES_CREATED_QUEUE_NAME, true);
   }
 
   @Bean

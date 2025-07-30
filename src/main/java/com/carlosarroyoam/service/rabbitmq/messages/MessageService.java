@@ -1,6 +1,7 @@
 package com.carlosarroyoam.service.rabbitmq.messages;
 
-import com.carlosarroyoam.service.rabbitmq.config.RabbitMqConfig;
+import com.carlosarroyoam.service.rabbitmq.config.RabbitMqProducerConfig;
+import com.carlosarroyoam.service.rabbitmq.messages.event.MessageCreatedEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +13,8 @@ public class MessageService {
     this.rabbitTemplate = rabbitTemplate;
   }
 
-  public void send(Message message) {
-    rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, RabbitMqConfig.ROUTING_KEY,
-        message);
+  public void send(MessageCreatedEvent message) {
+    rabbitTemplate.convertAndSend(RabbitMqProducerConfig.MESSAGES_EXCHANGE_NAME,
+        RabbitMqProducerConfig.MESSAGES_CREATED_ROUTING_KEY, message);
   }
 }
