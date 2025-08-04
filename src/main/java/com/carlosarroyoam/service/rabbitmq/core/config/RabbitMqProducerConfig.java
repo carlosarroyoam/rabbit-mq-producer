@@ -1,4 +1,4 @@
-package com.carlosarroyoam.service.rabbitmq.config;
+package com.carlosarroyoam.service.rabbitmq.core.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;

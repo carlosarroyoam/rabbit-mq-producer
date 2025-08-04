@@ -1,6 +1,6 @@
 package com.carlosarroyoam.service.rabbitmq.messages;
 
-import com.carlosarroyoam.service.rabbitmq.config.RabbitMqProducerConfig;
+import com.carlosarroyoam.service.rabbitmq.core.config.RabbitMqProducerConfig;
 import com.carlosarroyoam.service.rabbitmq.messages.event.MessageCreatedEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
