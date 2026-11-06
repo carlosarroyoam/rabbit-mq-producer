@@ -65,24 +65,22 @@ public class RabbitMqProducerConfig {
     RabbitTemplate template = new RabbitTemplate(connectionFactory);
     template.setMessageConverter(messageConverter);
     template.setMandatory(true);
-    template.setConfirmCallback(
-        (correlationData, ack, cause) -> {
-          String id = correlationData != null ? correlationData.getId() : null;
-          if (ack) {
-            log.info("Message confirmed by broker, correlationId={}", id);
-          } else {
-            log.error("Message rejected by broker, correlationId={}, cause={}", id, cause);
-          }
-        });
-    template.setReturnsCallback(
-        returned ->
-            log.error(
-                "Message returned by broker, exchange={}, routingKey={}, replyCode={}, replyText={}, body={}",
-                returned.getExchange(),
-                returned.getRoutingKey(),
-                returned.getReplyCode(),
-                returned.getReplyText(),
-                new String(returned.getMessage().getBody())));
+    template.setConfirmCallback((correlationData, ack, cause) -> {
+      String id = correlationData != null ? correlationData.getId() : null;
+      if (ack) {
+        log.info("Message confirmed by broker, correlationId={}", id);
+      } else {
+        log.error("Message rejected by broker, correlationId={}, cause={}", id, cause);
+      }
+    });
+    template.setReturnsCallback(returned ->
+        log.error(
+            "Message returned by broker, exchange={}, routingKey={}, replyCode={}, replyText={}, body={}",
+            returned.getExchange(),
+            returned.getRoutingKey(),
+            returned.getReplyCode(),
+            returned.getReplyText(),
+            new String(returned.getMessage().getBody())));
     return template;
   }
 
